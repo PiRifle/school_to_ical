@@ -1,0 +1,22 @@
+{
+    "name": "pirifle/school_to_ical",
+    "description": "Software which helps convert and sync Vulcan School plan to google or any ical compatible calendar",
+    "type": "project",
+    "require": {
+        "paquettg/php-html-parser": "^3.1",
+        "guzzlehttp/guzzle": "^7.8",
+        "eluceo/ical": "^2.12"
+    },
+    "autoload": {
+        "files": ["src/Utils.php"],
+        "psr-4": {
+            "Pirifle\\SchoolToIcal\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "PiRifle",
+            "email": "piotrekpolocz@gmail.com"
+        }
+    ]
+}
