@@ -11,13 +11,10 @@ class HTTPCalendarProvider extends Provider {
     private Client $http;
     private Dom $parser;
     private string $lesson_plan;
-    private string $substitutions;
-
     public function __construct(string $lesson_plan_url, string $substitutions_url = null) {
         $this->http = new Client();
         $this->parser = new Dom();
         $this->lesson_plan = $lesson_plan_url;
-        $this->substitutions = $substitutions_url;
     }
 
     public function parse(string $class){
@@ -26,6 +23,11 @@ class HTTPCalendarProvider extends Provider {
         return $this->get_class_timetable($links[$class]);
     }
     
+    public function get_classes(){
+        $links = $this->get_classes_links();
+        return array_keys($links);
+    } 
+
     /** 
      * @throws \GuzzleHttp\Exception\BadResponseException
      * @return array<string, string>
@@ -55,14 +57,6 @@ class HTTPCalendarProvider extends Provider {
         return $links;
     }
 
-    // /** 
-    //  * @param Calendar $calendar
-    //  * @return Calendar
-    // */
-    // private function apply_substitutions(Calendar $calendar){
-
-    // }
-
     private function get_date_for_target_day_of_week($targetDay) {
         $currentDate = new \DateTime();
         $currentDay = $currentDate->format('N'); // 1 for Monday, 2 for Tuesday, etc.
@@ -85,16 +79,23 @@ class HTTPCalendarProvider extends Provider {
 
     /** 
      * @param string $class_link
-     * @return Calendar
     */
-    public function get_class_timetable($class_link){
+    public function fetch_table($class_link){
         $req = $this->http->get($this->lesson_plan."/".$class_link);
         if ($req->getStatusCode() > 299 && $req->getStatusCode() < 200){
             throw new \Exception("Bad Response while fetching lesson_plan");
         }
         $this->parser->loadStr($req->getBody()->getContents());
         
-        $table = $this->parser->find(".tabela")[0];
+        return $this->parser->find(".tabela")[0];
+    }
+
+    /** 
+     * @param string $class_link
+     * @return Calendar
+    */
+    public function get_class_timetable($class_link){
+        $table = $this->fetch_table($class_link);
         $parsed_table = parseHtmlTable($table);
         array_shift($parsed_table);
 
