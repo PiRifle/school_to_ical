@@ -1,5 +1,6 @@
 <?php
 require dirname(__FILE__) ."/vendor/autoload.php";
+date_default_timezone_set('Europe/Warsaw');
 
 use Pirifle\SchoolToIcal\Provider\HTTPCalendarProvider;
 use Pirifle\SchoolToIcal\Parser\ICalParser;

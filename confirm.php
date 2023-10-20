@@ -1,6 +1,7 @@
 <?php
-require dirname(__FILE__) ."/vendor/autoload.php";
+require dirname(__FILE__) . "/vendor/autoload.php";
 use function GuzzleHttp\Psr7\build_query;
+
 ?>
 
 <!DOCTYPE html>
@@ -22,16 +23,21 @@ use function GuzzleHttp\Psr7\build_query;
         <hr>
         <h3>Your plan link is here!</h3>
         <div class="row">
-            <div class="two-thirds column"><input type="text" style="width: 100%" class="link"/></div>
-            <div class="one-third column"><a class="s_link"><button>Download Plan</button></a></div>
+            <center>
+                <div class="two-thirds column"><input type="text" style="width: 100%" class="link" /></div>
+                <div class="one-third column"><a class="s_link"><button style="width: 100%">Download Plan</button></a>
+                </div>
+            </center>
+
         </div>
     </div>
 </body>
 <script>
-    const url = new URL("<?php echo "generate_calendar.php?".build_query($_POST)?>", window.location);
+    const url = new URL("<?php echo "generate_calendar.php?" . build_query($_POST) ?>", window.location);
     // console.log(url)
     document.querySelector(".link").value = url
     document.getElementsByClassName("link")[0].select()
     document.querySelector(".s_link").setAttribute("href", url)
 </script>
+
 </html>

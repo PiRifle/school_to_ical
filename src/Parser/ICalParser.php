@@ -19,8 +19,8 @@ class ICalParser{
                 ->setDescription("Teacher: ".$lesson->teacher->name." Classroom: ".$lesson->classroom->room_number)
                 ->setOccurrence(
                     new \Eluceo\iCal\Domain\ValueObject\TimeSpan(
-                        new \Eluceo\iCal\Domain\ValueObject\DateTime($lesson->from, false),
-                        new \Eluceo\iCal\Domain\ValueObject\DateTime($lesson->to, false),
+                        new \Eluceo\iCal\Domain\ValueObject\DateTime($lesson->from, true),
+                        new \Eluceo\iCal\Domain\ValueObject\DateTime($lesson->to, true),
                     )
                 );
             array_push($events, $event);

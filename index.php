@@ -42,7 +42,7 @@
         if (!(res.status > 199 && res.status < 299)) alert("error fetching website, check link before proceeding");
         
         lessonPlan = e.target.value;
-
+        classes.innerHTML = "";
         (await res.json()).forEach(a=>{
             console.log(a)
             const option = document.createElement("option")
