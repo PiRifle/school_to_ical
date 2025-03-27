@@ -22,21 +22,21 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     };
 
     return (
-        <div className="relative flex flex-col items-center">
+        <div className="relative flex flex-col items-center max-lg:w-full max-lg:px-4">
             <input 
                 {...props} 
                 onKeyUp={checkPattern} 
                 ref={ref} 
-                className="px-10 min-w-96 py-3 block rounded-full outline-none bg-transparent backdrop:blur-3xl border-primary shadow-primary border-2" 
+                className="block px-10 py-3 bg-transparent border-2 rounded-full outline-none lg:min-w-96 max-lg:min-w-full backdrop:blur-3xl border-primary shadow-primary" 
                 style={{ boxShadow: "0px 0px 40px -10px var(--tw-shadow-color)" }} 
                 type="text" 
             />
             <motion.div 
                 animate={errorMessage ? {} : { opacity: 0, y: -20 }} 
-                className="relative top-4 min-w-max -z-10"
+                className="relative lg:top-4 max-lg:absolute max-lg:-top-20 min-w-max -z-10"
             >
                 <div 
-                    className="absolute -translate-x-1/2 px-4 min-w-max py-2 border-2 border-danger rounded-full bg-danger bg-opacity-55 border-opacity-75 backdrop-blur-xl shadow-danger" 
+                    className="absolute px-4 py-2 -translate-x-1/2 border-2 border-opacity-75 rounded-full min-w-max border-danger bg-danger bg-opacity-55 backdrop-blur-xl shadow-danger" 
                     style={{ boxShadow: "0px 0px 40px -10px var(--tw-shadow-color)" }}
                 >
                     {errorMessage}

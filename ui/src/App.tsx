@@ -86,8 +86,8 @@ function App({ setRealized, realized }: { setRealized: Dispatch<SetStateAction<b
   link.searchParams.set("class", className!)
   link.searchParams.set("plan_url", query.get("plan_url")!)
 
-  return <div className="lg:w-screen lg:h-screen lg:relative lg:overflow-hidden text-white">
-    <div className="my-10 mx-20 absolute flex flex-row items-center gap-6 z-40">
+  return <div className="relative w-screen h-screen overflow-hidden text-white">
+    <div className="absolute z-40 flex flex-row items-center gap-6 mx-10 my-10 lg:mx-20">
       <Link to="/" style={{ position: "relative", zIndex: 999 }}><img src={Logo} className="mr-9" /></Link>
       <AnimatePresence>
         <motion.div onClickCapture={() => { setQuery("/", { plan_url: query.get("plan_url")! }); setRealized(false); selectClassName(null); setHtmlPlan(null); setTimeout(() => { inputRef.current?.focus() }, 20) }} animate={{ opacity: realized ? 1 : 0, x: realized ? 0 : -200 }}  >
@@ -101,19 +101,19 @@ function App({ setRealized, realized }: { setRealized: Dispatch<SetStateAction<b
     <AnimatePresence>
       {
         location.pathname === '/' &&
-        <motion.div key={0} initial={{ opacity: 0, x: -150 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 150 }} className="absolute top-0 bottom-0 w-full">
-          <div className="container mx-auto flex flex-col justify-center min-h-screen">
+        <motion.div key={0} initial={{ opacity: 0, x: -150 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 150 }} className="absolute top-0 bottom-0 w-full max-lg:top-36">
+          <div className="container flex flex-col min-h-full mx-auto lg:justify-center">
 
-            <h1 className="font-black text-[9rem] leading-tight">Koniec z <br />chaosem </h1>
-            <h2 className="my-10 text-[2.3rem] font-extrabold">w planach lekcji!</h2>
-            <p className="w-1/3 text-lg">Twoje rozwiązanie do harmonizacji planów z Vulcan Optivum z Twoim ulubionym kalendarzem. Konwertuj, synchronizuj, zapanuj nad czasem już teraz!</p>
+            <h1 className="font-black lg:text-[9rem] max-lg:text-center max-lg:text-[2.2rem] leading-tight">Koniec z <br class="max-lg:hidden" />chaosem </h1>
+            <h2 className="lg:my-10 lg:text-[2.3rem] max-lg:text-center max-lg:text-[2.2rem] font-extrabold">w planach lekcji!</h2>
+            <p className="text-lg max-lg:text-sm max-lg:mt-2 max-lg:text-center max-lg:mx-3 lg:w-1/3">Twoje rozwiązanie do harmonizacji planów z Vulcan Optivum z Twoim ulubionym kalendarzem. Konwertuj, synchronizuj, zapanuj nad czasem już teraz!</p>
 
-            <div className="my-20">
-              <p className="text-xs mx-5 my-2">Wprowadź link do planu Vulcan Optivum twojej szkoły!</p>
+            <div className="items-center w-screen my-20 max-lg:flex max-lg:flex-col max-lg:justify-end max-lg:flex-grow max-lg:mb-5">
+              <p className="mx-5 my-2 max-lg:text-xs">Wprowadź link do planu Vulcan Optivum twojej szkoły!</p>
 
-              <div className="flex flex-row items-center">
+              <div className="flex items-center max-lg:flex-col lg:flex-row max-lg:w-full">
                 <Input name="plan_url" placeholder="https://plan.elektryk.opole.pl" value={query.get("plan_url")!} errorMessage={errMessage} onVerify={setVerify} ref={inputRef} onChange={(a) => { setQuery("", { plan_url: a.target.value }) }}></Input>
-                <motion.button animate={{ opacity: verified ? 1 : 0, x: verified ? 0 : -10 }} whileHover={{ x: verified ? 10 : undefined, opacity: verified ? 0.8 : undefined }} transition={{ duration: 0.03 }} className="px-4 hover:scale-110 hover:shadow-2xl transition-all duration-75 shadow-white"><img src={Arrow} onClick={onPlanEntered} /></motion.button>
+                <motion.button animate={{ opacity: verified ? 1 : 0, x: verified ? 0 : -10 }} whileHover={{ x: verified ? 10 : undefined, opacity: verified ? 0.8 : undefined }} transition={{ duration: 0.03 }} className="px-4 transition-all duration-75 max-lg:pt-4 hover:scale-110 hover:shadow-2xl shadow-white"><img src={Arrow} onClick={onPlanEntered} /></motion.button>
               </div>
             </div>
           </div>
@@ -121,7 +121,7 @@ function App({ setRealized, realized }: { setRealized: Dispatch<SetStateAction<b
       {location.pathname.startsWith('/chooseplan') &&
         <motion.div key={1} initial={{ opacity: 0, x: -150 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 150 }} className="absolute top-[15%] bottom-0 w-full">
           <h2 className="container mx-auto my-10 text-[2.3rem] font-extrabold">Do której klasy chodzisz?</h2>
-          <div className="container mx-auto min-h-screen grid lg:grid-cols-3 lg:grid-rows-3">
+          <div className="container grid min-h-screen mx-auto lg:grid-cols-3 lg:grid-rows-3">
             <div className="max-lg:mb-24">
               <div className="flex flex-wrap">
                 {classes.map(a => <Pod text={a} selected={a == className} onClick={() => onClassSelected(a)} />)}
