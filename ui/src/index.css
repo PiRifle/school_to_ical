@@ -1,0 +1,7 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+.mask_img {
+    mask-image: linear-gradient(to bottom,white 76%, transparent 95%);
+}

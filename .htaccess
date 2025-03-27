@@ -1,0 +1,15 @@
+RewriteEngine On
+
+# If the request is for a file or directory that actually exists, do nothing
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# If the request starts with /api, do nothing
+RewriteCond %{REQUEST_URI} ^/api
+RewriteCond %{REQUEST_URI} ^/assets
+RewriteCond %{REQUEST_URI} ^/vite.svg
+RewriteRule ^ - [L]
+
+# Otherwise, redirect all other traffic to index.html
+RewriteRule ^ index.html [L]
